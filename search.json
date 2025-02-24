@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Grammar of Graphics & Plotnine",
+    "section": "",
+    "text": "Code\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom plotnine import *"
+  },
+  {
+    "objectID": "index.html#what-is-grammar-of-graphics",
+    "href": "index.html#what-is-grammar-of-graphics",
+    "title": "Grammar of Graphics & Plotnine",
+    "section": "1.1 What is Grammar of Graphics",
+    "text": "1.1 What is Grammar of Graphics\n\n\n\n\n\n\nKey Concept\n\n\n\nThe Grammar of Graphics is a systematic approach to creating data visualizations by breaking charts into different components.\n\n\nThe Grammar of Graphics breaks a chart into different components such as:\n\nData: The dataset being visualized.\nAesthetics: Mapping variables to visual properties.\nGeometries: Shapes used to represent data (points, lines, bars, etc.).\nFacets: Splitting data into multiple panels.\nStatistics: Transformations applied to data before plotting.\nCoordinates: The space where the plot is drawn (cartesian, polar, etc.).\n\n\n\n\nComponents of Grammar of Graphics"
+  },
+  {
+    "objectID": "index.html#why-is-grammar-of-graphics-important",
+    "href": "index.html#why-is-grammar-of-graphics-important",
+    "title": "Grammar of Graphics & Plotnine",
+    "section": "1.2 Why is Grammar of Graphics Important?",
+    "text": "1.2 Why is Grammar of Graphics Important?\nThe Grammar of Graphics allows users to build complex plots easily by layering components instead of hardcoding each visualization.\nLet’s see that with an example:\n\n\nCode\nmpg = sns.load_dataset(\"mpg\")\nmpg.head()\n\n\n\n\n\n\n\n\n\nmpg\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\nmodel_year\norigin\nname\n\n\n\n\n0\n18.0\n8\n307.0\n130.0\n3504\n12.0\n70\nusa\nchevrolet chevelle malibu\n\n\n1\n15.0\n8\n350.0\n165.0\n3693\n11.5\n70\nusa\nbuick skylark 320\n\n\n2\n18.0\n8\n318.0\n150.0\n3436\n11.0\n70\nusa\nplymouth satellite\n\n\n3\n16.0\n8\n304.0\n150.0\n3433\n12.0\n70\nusa\namc rebel sst\n\n\n4\n17.0\n8\n302.0\n140.0\n3449\n10.5\n70\nusa\nford torino\n\n\n\n\n\n\n\n\n1.2.0.1 Traditional Matplotlib plot\n\n\nCode\nplt.figure(figsize=(8,5))\nplt.scatter(mpg['weight'], mpg['mpg'], color='blue')\n\nplt.xlabel(\"Car Weight\")\nplt.ylabel(\"Miles per Gallon (MPG)\")\nplt.title(\"Car Weight vs. MPG\")\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\n1.2.0.2 Grammar of Graphics plot with Plotnine\n\n\nCode\np = (\n    ggplot(mpg) +\n    aes(x=\"weight\", y=\"mpg\", color=\"origin\") +\n    geom_point() +\n    labs(x=\"Car Weight\", y=\"Miles per Gallon (MPG)\") +\n    theme_minimal()\n)\n\np.draw()\np.show()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nObservation\n\n\n\nThe Grammar of Graphics approach allows us to easily add additional information (car origin) to our plot without significantly changing the code structure."
+  },
+  {
+    "objectID": "index.html#key-features",
+    "href": "index.html#key-features",
+    "title": "Grammar of Graphics & Plotnine",
+    "section": "2.1 Key Features",
+    "text": "2.1 Key Features\n\nGrammar of Graphics Approach\nSimple and Concise Syntax\nMultiple Geometries\nStatistical Transformations\nFaceting (Subplots)\nThemes for Customization\nSupports Custom Labels & Titles\nWorks with Pandas & DataFrames\nExporting & Saving Plots"
+  },
+  {
+    "objectID": "index.html#creating-plots-with-plotnine",
+    "href": "index.html#creating-plots-with-plotnine",
+    "title": "Grammar of Graphics & Plotnine",
+    "section": "2.2 Creating Plots with Plotnine",
+    "text": "2.2 Creating Plots with Plotnine\n\n2.2.1 How to Install plotnine?\nOpen command prompt or teminal and give this command:\npip install plotnine\n\n\n2.2.2 Import and Version check\n\n\nCode\nimport plotnine\nprint(\"Plotnine version:\", plotnine.__version__)\n\n\nPlotnine version: 0.14.5\n\n\n\n\n2.2.3 Basic Scatter Plot\n\n\nCode\ndf = pd.DataFrame({\n    'x': range(10),\n    'y': [4, 5, 9, 1, 7, 3, 2, 2, 8, 9]\n})\n\np = (\n    ggplot(df) +\n    aes(x='x', y='y') +\n    geom_point()\n)\n\np.draw()\np.show()\n\n\n\n\n\n\n\n\n\n\n\n2.2.4 Basic Histogram\n\n\nCode\ndf_hist = pd.DataFrame({'data': np.random.randn(1000)})\n\np = (\n    ggplot(df_hist) +\n    aes(x='data') +\n    geom_histogram(binwidth=0.5, fill='lightblue', color='black')\n)\n\np.draw()\np.show()\n\n\n\n\n\n\n\n\n\n\n\n2.2.5 Simple Line plot\n\n\nCode\nx = np.arange(1, 11)\ny = [i*i for i in x]\n\ndf = pd.DataFrame({\n'x': x,\n'y': y\n})\n\np = (\n    ggplot(df, aes(x='x', y='y')) +\n    geom_line(color='blue') +\n    labs(title=\"Line Plot Example\", x=\"X-Axis\", y=\"Y-Axis\")\n)\n\np.draw()\np.show()\n\n\n\n\n\n\n\n\n\n\n\n2.2.6 Simple Bar Plot\n\n\nCode\ndf_bar = pd.DataFrame({\n  'vegetable': ['Potata', 'Carrot', 'Peas', 'Tomata'], \n  'price': [40, 25, 20, 60]}\n)\n\np = (\n  ggplot(df_bar) +\n  aes(x='vegetable', y='price') +\n  geom_bar(stat='identity', fill='skyblue')\n)\n\np.draw()\np.show()"
+  },
+  {
+    "objectID": "index.html#grammar-of-graphics-approach",
+    "href": "index.html#grammar-of-graphics-approach",
+    "title": "Grammar of Graphics & Plotnine",
+    "section": "3.1 Grammar of Graphics Approach",
+    "text": "3.1 Grammar of Graphics Approach\nThe Grammar of Graphics approach allows us to build plots layer by layer. And as plotnine is build on the principles of Grammer of Graphics, it is easier to appply it with help of plotnine.\nLet’s start with a basic scatter plot and then add layers to it.\n\n\nCode\ndf = pd.DataFrame({\n    'x': range(10),\n    'y': np.random.randint(1, 11, 10)\n})\n\np = (\n    ggplot(df) +\n    aes(x='x', y='y') +\n    geom_point()\n)\n\np.draw()\np.show()"
+  },
+  {
+    "objectID": "index.html#simple-and-concise-syntax",
+    "href": "index.html#simple-and-concise-syntax",
+    "title": "Grammar of Graphics & Plotnine",
+    "section": "3.2 Simple and Concise Syntax",
+    "text": "3.2 Simple and Concise Syntax\nNotice how we can easily add layers to our plot using the + operator. This makes the syntax simple and intuitive.\np = (ggplot(df, aes(x='x', y='y', color='category'))\n     + geom_point()\n     + geom_smooth(method='lm', se=False)\n     + labs(title=\"Scatter Plot with Trend Lines\",\n            x=\"X-axis\",\n            y=\"Y-axis\",\n            color=\"Category\")\n     + theme_minimal()\n)"
+  },
+  {
+    "objectID": "index.html#multiple-geometries",
+    "href": "index.html#multiple-geometries",
+    "title": "Grammar of Graphics & Plotnine",
+    "section": "3.3 Multiple Geometries",
+    "text": "3.3 Multiple Geometries\nplotnine supports various geometries through its geom_* functions, which allow you to create different types of plots. These geometries are based on the Grammar of Graphics concept, similar to ggplot2 in R. Some key geometries include:\n\ngeom_point(): Creates scatter plots1.\ngeom_line(): Draws line plots1.\ngeom_bar(): Produces bar charts1.\ngeom_polygon(): Generates polygon shapes2.\ngeom_map(): Specifically designed for plotting geographic data and creating maps57.\n\nThese geometries can be combined and layered to create complex visualizations. Let’s combine points and lines in one plot.\n\n\nCode\nnp.random.seed(42)\ndf = pd.DataFrame({\n    'x': np.random.normal(0, 1, 100),\n    'y': np.random.normal(0, 1, 100),\n    'category': np.random.choice(['A', 'B', 'C'], 100)\n})\n\np = (ggplot(df, aes(x='x', y='y', color='category'))\n     + geom_point()\n     + geom_smooth(method='lm', se=False)\n     + labs(title=\"Scatter Plot with Trend Lines\",\n            x=\"X-axis\",\n            y=\"Y-axis\",\n            color=\"Category\")\n     + theme_minimal()\n)\n\np.draw()\np.show()"
+  },
+  {
+    "objectID": "index.html#statistical-transformations",
+    "href": "index.html#statistical-transformations",
+    "title": "Grammar of Graphics & Plotnine",
+    "section": "3.4 Statistical Transformations",
+    "text": "3.4 Statistical Transformations\nStatistical transformations in plotnine are an important feature that allow you to aggregate and transform your data before plotting. Statistical transformations can compute new values based on the input data, enabling you to display summary statistics or derived metrics instead of raw data points. Here are some common transformations:\n\nstat_count(): Counts the number of cases at each x position\nstat_bin(): Bins continuous data for histograms\nstat_smooth(): Adds a smoothed conditional mean\nstat_summary(): Summarizes y values for each unique x value\n\nBy leveraging statistical transformations, plotnine enables you to create informative visualizations that go beyond simply plotting raw data, allowing for more insightful data exploration and presentation. Here’s an example…\n\n\nCode\nx = range(1, 11)\ny = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]\ndf = pd.DataFrame({\n    'x': x, \n    'y': y\n})\n\np = (\n    ggplot(df, aes(x='x', y='y')) +\n    geom_point() +\n    geom_smooth(method='lm')\n) \n\np.draw()\np.show()"
+  },
+  {
+    "objectID": "index.html#faceting-subplots",
+    "href": "index.html#faceting-subplots",
+    "title": "Grammar of Graphics & Plotnine",
+    "section": "3.5 Faceting (Subplots)",
+    "text": "3.5 Faceting (Subplots)\nFaceting in plotnine is a powerful technique that allows you to create multiple subplots based on categorical variables in your dataset. This feature enables you to split your main plot into several smaller plots, each representing a different category or combination of categories.\nTypes of faceting:\n\nfacet_wrap(): Creates a wrapped layout of subplots based on a single categorical variable.\nfacet_grid(): Forms a grid of subplots based on two categorical variables (rows and columns).\n\n\n\nCode\ndf = pd.DataFrame({\n    'x': np.arange(1, 11),\n    'y': np.random.randint(1, 26, 10), \n    'category': ['A', 'A', 'A', 'A', 'B', 'B', 'B', 'B', 'C', 'C'] \n})\n\np = (\n    ggplot(df, aes(x='x', y='y')) +\n    geom_point() +\n    facet_wrap(\"~category\")\n)\n\np.draw()\np.show()"
+  },
+  {
+    "objectID": "index.html#themes-for-customization",
+    "href": "index.html#themes-for-customization",
+    "title": "Grammar of Graphics & Plotnine",
+    "section": "3.6 Themes for Customization",
+    "text": "3.6 Themes for Customization\nPlotnine offers a variety of themes for customizing the appearance of your plots.\n\nBuilt-in themes: Plotnine provides several pre-defined themes, such as theme_void(), which creates a minimal base theme1.\nCustom themes: You can create custom themes using the theme() function. This allows you to modify various elements of your plot, including axis titles, legend appearance, plot title, and more.\n\n\n\nCode\nfrom plotnine.themes import theme_minimal\n\np = (\n    ggplot(df, aes(x='x', y='y')) +\n    geom_point() +\n    theme_minimal()\n)\n \np.draw()\np.show()"
+  },
+  {
+    "objectID": "index.html#supports-custom-labels-titles",
+    "href": "index.html#supports-custom-labels-titles",
+    "title": "Grammar of Graphics & Plotnine",
+    "section": "3.7 Supports Custom Labels & Titles",
+    "text": "3.7 Supports Custom Labels & Titles\nWe can easily customize labels and titles for our plots.\nggplot(df, aes(x='x', y='y')) + \ngeom_point() + \nlabs(title = \"Scatter Plot\", x = \"X-Axis\", y = \"Y-Axis\")"
+  },
+  {
+    "objectID": "index.html#works-with-pandas-dataframes",
+    "href": "index.html#works-with-pandas-dataframes",
+    "title": "Grammar of Graphics & Plotnine",
+    "section": "3.8 Works with Pandas & DataFrames",
+    "text": "3.8 Works with Pandas & DataFrames\nAs you’ve seen in all examples, Plotnine works seamlessly with Pandas DataFrames."
+  },
+  {
+    "objectID": "index.html#exporting-saving-plots",
+    "href": "index.html#exporting-saving-plots",
+    "title": "Grammar of Graphics & Plotnine",
+    "section": "3.9 Exporting & Saving Plots",
+    "text": "3.9 Exporting & Saving Plots\nPlotnine allows you to save plots easily. Here’s how you can save a plot:\np = ggplot(df, aes(x='x', y='y')) + geom_point()\np.save(\"plot.png\")\nThis demonstration showcases the power and flexibility of Plotnine in implementing the Grammar of Graphics. Each feature contributes to making data visualization more intuitive, customizable, and powerful in Python."
+  }
+]
